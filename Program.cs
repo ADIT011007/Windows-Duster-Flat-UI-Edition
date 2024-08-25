@@ -17,6 +17,6 @@ namespace Windows_Duster_FlatUi_Edition
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form2());
-        }
+        }//TERI MAA KI CHUT
     }
 }

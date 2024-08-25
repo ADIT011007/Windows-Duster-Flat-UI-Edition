@@ -771,7 +771,7 @@ namespace Windows_Duster_FlatUi_Edition
                 defragProcess.StartInfo.UseShellExecute = false;
                 defragProcess.StartInfo.RedirectStandardOutput = true;
                 defragProcess.StartInfo.RedirectStandardError = true;
-                defragProcess.StartInfo.CreateNoWindow = false;
+                defragProcess.StartInfo.CreateNoWindow = true;
 
                 try
                 {
