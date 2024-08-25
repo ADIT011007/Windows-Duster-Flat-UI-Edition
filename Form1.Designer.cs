@@ -48,6 +48,7 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -176,7 +177,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label1.Location = new System.Drawing.Point(546, 19);
+            this.label1.Location = new System.Drawing.Point(546, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(509, 39);
             this.label1.TabIndex = 1;
@@ -186,7 +187,7 @@
             // 
             this.metroListView1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.metroListView1.FullRowSelect = true;
-            this.metroListView1.Location = new System.Drawing.Point(553, 166);
+            this.metroListView1.Location = new System.Drawing.Point(553, 227);
             this.metroListView1.Name = "metroListView1";
             this.metroListView1.OwnerDraw = true;
             this.metroListView1.Size = new System.Drawing.Size(502, 207);
@@ -213,7 +214,7 @@
             // 
             // outputTextBox
             // 
-            this.outputTextBox.Location = new System.Drawing.Point(553, 166);
+            this.outputTextBox.Location = new System.Drawing.Point(553, 227);
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.Size = new System.Drawing.Size(502, 207);
             this.outputTextBox.TabIndex = 7;
@@ -239,7 +240,7 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.metroLabel1.Location = new System.Drawing.Point(553, 143);
+            this.metroLabel1.Location = new System.Drawing.Point(789, 140);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(84, 20);
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Green;
@@ -264,12 +265,26 @@
             this.button1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.button1.Location = new System.Drawing.Point(294, 166);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(253, 23);
+            this.button1.Size = new System.Drawing.Size(1069, 23);
             this.button1.TabIndex = 11;
             this.button1.Text = "Cancle System Scan ?";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.ForeColor = System.Drawing.Color.Red;
+            this.button2.Location = new System.Drawing.Point(294, 198);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(1069, 23);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "HELP !";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
@@ -277,6 +292,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(31)))));
             this.ClientSize = new System.Drawing.Size(1365, 438);
             this.ControlBox = false;
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.metroLabel1);
@@ -322,6 +338,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

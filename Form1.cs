@@ -851,5 +851,10 @@ namespace Windows_Duster_FlatUi_Edition
             KillAllDismProcesses();
             button1.Visible = false;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
