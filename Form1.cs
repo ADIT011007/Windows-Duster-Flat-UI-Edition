@@ -19,6 +19,7 @@ namespace Windows_Duster_FlatUi_Edition
 {
     public partial class Form1 : Form
     {
+        private bool isdefraging = false;
         private DriveInfo[] drives;
         private bool isnetworkworking = false;
         private bool isworkingonupdateorscan = false;
@@ -648,7 +649,12 @@ namespace Windows_Duster_FlatUi_Edition
 
                     // Update progress in ListView
                     item.SubItems[1].Text = $"{progress}%";
-
+                    progressBar1.Value =+ ((int)progress);
+                   if(progressBar1.Value == 1600)
+                    {
+                        progressBar1.Maximum = 100;
+                        
+                    }
                 }
             }
         }
@@ -728,18 +734,42 @@ namespace Windows_Duster_FlatUi_Edition
 
         private async void iconButton4_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Warning: Defragmenting your HDD may take up to an hour or longer, depending on the current health and fragmentation level of your disk. ","Please ensure your device is plugged in and avoid using it heavily during the process." , MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-            if (result == DialogResult.OK)
+            isdefraging = true;
+            button1.Visible = true;
+            button1.Text = "Cancle Defragment / Trimming";
+            DialogResult result1 = MessageBox.Show(
+     "Starting this process will temporarily freeze Win Duster. Please do not worry and allow the process to complete.",
+     "Process Notification",
+     MessageBoxButtons.OKCancel,
+     MessageBoxIcon.Exclamation
+ );
+
+            if (result1 == DialogResult.OK)
             {
-                iconButton4.Enabled = false;
-                metroLabel1.Visible = true;
-                CheckForHDD();
-                await Task.Delay(2000);
-                StartDefragmentation();
+                DialogResult result = MessageBox.Show(
+                    "Warning: Defragmenting your HDD may take an hour or more, depending on the current health and fragmentation level of your disk. Please ensure your device is plugged in and avoid heavy usage during the process.",
+                    "Defragmentation Warning",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Exclamation
+                );
+
+                if (result == DialogResult.OK)
+                {
+                    iconButton4.Enabled = false;
+                    metroLabel1.Visible = true;
+                    CheckForHDD();
+                    await Task.Delay(2000);
+                    StartDefragmentation();
+                }
             }
-                
-          
+
+
+
+
         }
+
+        // Global variable to hold the defrag process
+        private Process defragProcess;
 
         private async void StartDefragmentation()
         {
@@ -751,7 +781,7 @@ namespace Windows_Duster_FlatUi_Edition
                 return;
             }
 
-            metroLabel1.Text =($"Found {hddDrives.Count} drive(s) to defragment.");
+            metroLabel1.Text = ($"Found {hddDrives.Count} drive(s) to defragment.");
 
             progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.MarqueeAnimationSpeed = 30;
@@ -762,10 +792,10 @@ namespace Windows_Duster_FlatUi_Edition
 
                 string driveLetter = drive.Name.TrimEnd('\\'); // Remove trailing backslash
                 metroLabel1.ForeColor = Color.Green;
-                metroLabel1.Text =($"Defragmenting drive: {driveLetter}");
+                metroLabel1.Text = ($"Defragmenting drive: {driveLetter}");
 
                 string defragArguments = $"/O /U {driveLetter}";
-                Process defragProcess = new Process();
+                defragProcess = new Process();
                 defragProcess.StartInfo.FileName = "defrag.exe";
                 defragProcess.StartInfo.Arguments = defragArguments;
                 defragProcess.StartInfo.UseShellExecute = false;
@@ -786,18 +816,17 @@ namespace Windows_Duster_FlatUi_Edition
                     // Check if there were any errors
                     if (defragProcess.ExitCode != 0)
                     {
-                        metroLabel1.ForeColor= Color.Red;
+                        metroLabel1.ForeColor = Color.Red;
                         metroLabel1.Text = ($"Defragmentation of {driveLetter} failed: {error}");
-                        await Task.Delay(10000);
+                        await Task.Delay(10000); // 10 seconds delay
                         metroLabel1.Visible = false;
                     }
                     else
                     {
-                        metroLabel1.ForeColor = (Color.Green);
+                        metroLabel1.ForeColor = Color.Green;
                         metroLabel1.Text = ($"Defragmentation of {driveLetter} completed successfully.");
-                        await Task.Delay(10000);
+                        await Task.Delay(10000); // 10 seconds delay
                         metroLabel1.Visible = false;
-                     
                     }
                 }
                 catch (Exception ex)
@@ -810,8 +839,8 @@ namespace Windows_Duster_FlatUi_Edition
             progressBar1.Style = ProgressBarStyle.Blocks;
             progressBar1.MarqueeAnimationSpeed = 0;
             metroLabel1.Text = ("Defragmentation complete for all detected HDDs.");
+            isdefraging = false;
             progressBar1.Visible = false;
-
         }
 
 
@@ -848,12 +877,54 @@ namespace Windows_Duster_FlatUi_Edition
 
         private void button1_Click(object sender, EventArgs e)
         {
-            KillAllDismProcesses();
-            button1.Visible = false;
+            if(isdefraging == true)
+            {
+                if (defragProcess != null && !defragProcess.HasExited)
+                {
+                    defragProcess.Kill(); // Kill the defrag process
+                    metroLabel1.Text = "Defragmentation canceled.";
+                    progressBar1.Style = ProgressBarStyle.Blocks;
+                    progressBar1.MarqueeAnimationSpeed = 0;
+                    progressBar1.Visible = false;
+                    button1.Visible = false;
+                    button1.Text = "Cancle System Scan?";
+                }
+
+
+            }
+            else
+            {
+                KillAllDismProcesses();
+                button1.Visible = false;
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void metroButton2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Form1_Leave(object sender, EventArgs e)
+        {
+            bool isactiveonnform = true;
+            if (this.WindowState == FormWindowState.Maximized) 
+            {
+                isactiveonnform = true;
+            }
+            else
+            {
+                isactiveonnform = false;
+                if(isactiveonnform == false)
+                {
+                    //wtf
+                }
+            }
 
         }
     }

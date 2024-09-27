@@ -49,6 +49,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,6 +114,7 @@
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(-1, 413);
+            this.progressBar1.Maximum = 1600;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(288, 20);
             this.progressBar1.TabIndex = 3;
@@ -240,7 +242,7 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.metroLabel1.Location = new System.Drawing.Point(789, 140);
+            this.metroLabel1.Location = new System.Drawing.Point(678, 140);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(84, 20);
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Green;
@@ -286,22 +288,39 @@
             this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // metroButton2
+            // 
+            this.metroButton2.ForeColor = System.Drawing.Color.Red;
+            this.metroButton2.Location = new System.Drawing.Point(290, 0);
+            this.metroButton2.Name = "metroButton2";
+            this.metroButton2.Size = new System.Drawing.Size(73, 40);
+            this.metroButton2.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroButton2.TabIndex = 13;
+            this.metroButton2.Text = "Minimize";
+            this.metroButton2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroButton2.UseCustomBackColor = true;
+            this.metroButton2.UseCustomForeColor = true;
+            this.metroButton2.UseSelectable = true;
+            this.metroButton2.UseStyleColors = true;
+            this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(31)))));
             this.ClientSize = new System.Drawing.Size(1365, 438);
             this.ControlBox = false;
+            this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.metroListView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.outputTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -311,6 +330,7 @@
             this.Text = "Win Duster Flat UI Edtion";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Leave += new System.EventHandler(this.Form1_Leave);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -339,6 +359,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private MetroFramework.Controls.MetroButton metroButton2;
     }
 }
 
